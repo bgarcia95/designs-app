@@ -68,14 +68,42 @@ class _SingleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _SingleCardBackground(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            backgroundColor: color,
+            radius: 30,
+            child: Icon(
+              icon,
+              size: 35,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(text, style: TextStyle(color: color, fontSize: 18)),
+        ],
+      ),
+    );
+  }
+}
+
+class _SingleCardBackground extends StatelessWidget {
+  final Widget child;
+
+  const _SingleCardBackground({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
     final boxDecoration = BoxDecoration(
       color: const Color.fromRGBO(62, 66, 107, 0.7),
       borderRadius: BorderRadius.circular(20),
     );
 
-    // ClipRRect helps out to cut everything that's overflowing from its container, in this case we want to avoid blur propagation throughout the screen
     return Container(
       margin: const EdgeInsets.all(15),
+      // ClipRRect helps out to cut everything that's overflowing from its container, in this case we want to avoid blur propagation throughout the screen
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
@@ -83,25 +111,7 @@ class _SingleCard extends StatelessWidget {
           child: Container(
             height: 180,
             decoration: boxDecoration,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundColor: color,
-                  radius: 30,
-                  child: Icon(
-                    icon,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  text,
-                  style: TextStyle(color: color, fontSize: 18),
-                ),
-              ],
-            ),
+            child: child,
           ),
         ),
       ),
