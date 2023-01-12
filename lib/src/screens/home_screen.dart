@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           // Background
           const Background(),
+          // Home Content
           _HomeContent(),
         ],
       ),
@@ -28,6 +29,9 @@ class _HomeContent extends StatelessWidget {
         children: const [
           // Titles
           PageTitle(),
+
+          // Card Table
+          CardsTable(),
         ],
       ),
     );
