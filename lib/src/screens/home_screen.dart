@@ -8,9 +8,24 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: const [
+        children: [
           // Background
-          Background(),
+          const Background(),
+          _HomeContent(),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          // Titles
+          PageTitle(),
         ],
       ),
     );
