@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class CardsTable extends StatelessWidget {
   const CardsTable({super.key});
@@ -72,27 +73,37 @@ class _SingleCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
     );
 
+    // ClipRRect helps out to cut everything that's overflowing from its container, in this case we want to avoid blur propagation throughout the screen
     return Container(
       margin: const EdgeInsets.all(15),
-      height: 180,
-      decoration: boxDecoration,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            backgroundColor: color,
-            radius: 30,
-            child: Icon(
-              icon,
-              size: 35,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Container(
+            height: 180,
+            decoration: boxDecoration,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: color,
+                  radius: 30,
+                  child: Icon(
+                    icon,
+                    size: 35,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  text,
+                  style: TextStyle(color: color, fontSize: 18),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            text,
-            style: TextStyle(color: color, fontSize: 18),
-          ),
-        ],
+        ),
       ),
     );
   }
